@@ -55,6 +55,7 @@
         <button type = "submit" > <a href="#"> <strong> Print Probability Map </strong> </button> </a>
       </main>
       <footer></footer>
-      <script src="{% static 'gis_map/maps.js' %}"></script>
+      {{ map|safe }}
+      <!-- <script src="{% static 'gis_map/maps.js' %}"></script> -->
 </body>
 </html>
