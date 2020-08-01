@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARAID</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+</head>
+<body>
+    <!-- <form action="">
+        <label for="coords">Enter the JSON File</label>
+        <input type="file" id="coords" name="co-ordinates" accept=".json">
+        <br>
+        <button type="submit">Submit</button>
+    </form> -->
+      <header>
+        <div class = "container">
+          <div class = "imgcol">
+               <img src= "https://i.pinimg.com/originals/47/b7/0e/47b70e02dbe95d8ca08d26d83f0aa632.png"> </div>
+          <div class="textcol">
+            <h1>S.A.R.I.A.D. Project</h1>
+            
+        </div>
+      </header>  
+        <p class="solid"></p>
+        
+      <main>
+        <div class="container2">
+          <div class="imgcol2">
+            <div id="mapid" class="img2">
+        
+            </div>
+          </div>
+          <div class = "textcol2">
+            <label for="search" class="search">Latitude:</label>
+            <input type="search" class="search" name="search"  id="lat">
+            <label for="search" class="search">Longitude:</label>
+            <input type="search" class="search" name="search" id="long">
+            <label for="search" class="search">Altitude:</label>
+            <input type="search" class ="search" id="search" name="search"> 
+            <label for="search" class="search">Heading (Direction of the plane): </label>
+            <input type="search" id="search" name="search" class="search">
+            <br>
+            <button class="but">Submit</button>
+          </div>
+        </div>  
+        <button type = "submit" > <a href="#"> <strong> Print Probability Map </strong> </button> </a>
+      </main>
+      <footer></footer>
+      <script src="/maps.js"></script>
+</body>
+</html>
