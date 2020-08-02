@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class = "textcol2">
-            <label for="search" class="search">Latitude:</label>
+            {% comment %} <label for="search" class="search">Latitude:</label>
             <input type="search" class="search" name="search"  id="lat">
             <label for="search" class="search">Longitude:</label>
             <input type="search" class="search" name="search" id="long">
@@ -43,11 +43,11 @@
             <label for="search" class="search">Heading (Direction of the plane): </label>
             <input type="search" id="search" name="search" class="search">
             <br>
-            <button class="but" type="submit">Submit</button>
+            <button class="but" type="submit">Submit</button> {% endcomment %}
             <form action="" method= "POST">
               {% csrf_token %}
               {{ form }}
-              <button type="submit" class="btn btn-primary">submit</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>  
@@ -55,6 +55,5 @@
       </main>
       <footer></footer>
       {{ map|safe }}
-      {% comment %} <script src="{% static 'gis_map/maps.js' %}"></script> {% endcomment %}
 </body>
 </html>

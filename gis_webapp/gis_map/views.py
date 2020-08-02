@@ -6,38 +6,32 @@ from . import utils
 import folium
 
 def home(request):
-    m = folium.Map(location=[15.712950725807477, 81.48834228515625], width= '50%', height = '50%', zoom_start=8)
-    folium.Marker(location=[15.712950725807477, 81.48834228515625]).add_to(m)
-    rad = utils.get_radius()
-    centres = utils.get_centres()
-    rad3x = utils.get_rad3x()
-    polyg = utils.get_polygon()
-    poly3 = utils.get_polygon3x()
-
-    for i in range(len(centres)):
-        folium.Circle(location= centres[i],
-        radius= rad[i]/9.231617281886954e-06,
-        color= 'crimson',
-        fill= True,
-        stroke= False).add_to(m)
-
-        folium.Circle(location= centres[i],
-        radius= rad3x[i]/9.231617281886954e-06,
-        color= '#3186cc',
-        fill= True,
-        stroke= False).add_to(m)
     
-    folium.Polygon(polyg, color= 'crimson').add_to(m)
-    folium.Polygon(poly3, color= '#3186cc').add_to(m)
+    m = folium.Map(location=[20.5937, 78.9629], width= '50%', height = '50%', zoom_start=5)
 
     form = GisModelForm(request.POST or None)
     if form.is_valid():
         instance = form.save()
+    
+        LKP, rad, rad3x = utils.cal([instance.Latitude, instance.Longitude], instance.Speed, instance.Altitude, instance.Direction)
+        m = folium.Map(location=LKP, width= '50%', height = '50%', zoom_start=7)
+        folium.Marker(location=[instance.Latitude, instance.Longitude]).add_to(m)    
 
+        folium.Circle(location= LKP,
+            radius= rad,
+            color= '#010101',
+            fill= True,
+            stroke= False).add_to(m)
+        
+        folium.Circle(location= LKP,
+            radius= rad3x,
+            color= '#3186cc',
+            fill= True,
+            stroke= False).add_to(m)
+        
     context = {
         'map': m._repr_html_(),
-        'form': form
+        'form': form.as_p()
     }
 
     return render(request, 'gis_map/home.html', context)
-    # return HttpResponse(m._repr_html_()) #Testing of folium
