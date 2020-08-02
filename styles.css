@@ -18,112 +18,158 @@ form {
 button {
   margin: 20px;
 }
-header {
+header{
   color: Black;
-  font-family: Helvetica;
+  font-family:"Black Ops One";
   font-size: 25px;
   background: #adf7b1;
-  width: 1359px;
+  width: 1280px;
   height: 120px;
 }
 
-img {
+
+
+
+img{
   height: 100px;
   margin: 10px 10px 10px 10px;
+  
 }
 
-.container {
-  display: flex;
+.container{
+  display:flex;
 }
 
-.but {
-  border: 1px solid #abb3d6c2;
-  margin: 20px;
-  position: relative;
-  top: 20px;
-  font-size: 20px;
-  font-family: "Cambria", "monospace";
-}
-
-.textcol {
+.textcol{
   padding-left: 20px;
-  font-family: "Crimson Text", "Helvetica";
+  font-family: 'Crimson Text','Helvetica';
   font-size: 35px;
 }
 
-.textcol2 {
-  margin: 0 auto;
-  align-items: center;
+#img2{
+     height: 400px;
+     margin: 25px 20px 10px 30px;
+     box-shadow:0 10px 20px     rgba(0,0,0,0.56);
+     
 }
 
-#img2 {
-  height: 400px;
-  margin: 25px 20px 10px 30px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.56);
-}
-
-main {
-  background: white;
+main{
+  background:white;
   height: 600px;
 }
 
-p.solid {
-  border-style: solid;
-  width: 1350px;
-  border-width: 5px;
-  margin-top: 1px;
-  margin-bottom: 1px;
-  border-color: red;
+
+
+.container2{
+  display:flex;
+
 }
 
-.container2 {
-  display: flex;
-  align-items: center;
+footer{
+  background:#785a77;
+  height:100px;
+  width:1520px;
 }
 
-.container2 > div {
-  flex-basis: 4%;
+body{
+  margin:0;
 }
 
-footer {
-  background: #785a77;
-  height: 100px;
-  width: 1350px;
-}
-
-body {
-  margin: 0;
-}
-
-button {
+button{
   font-family: "Cambria", "monospace";
   margin-left: 30px;
-  color: black;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.36);
+  color:black;
+  box-shadow:0 10px 20px     rgba(0,0,0,0.36);
 }
 
-a {
-  color: black;
-}
-
-a:hover {
+button:hover{
+  transform:scale(1.1);
   color: red;
+  
 }
 
-h4 {
-  font-family: Cambria;
+
+h4{
+  font-family:"Comfortaa";
   font-size: 20px;
 }
 
-.search {
+.search{
   position: relative;
-  top: 20px;
-  line-height: 70px;
-  font-size: 20px;
-  font-family: "Cambria", "monospace";
+  line-height:35px;
+  font-size:20px;
+  font-family: "Comfortaa", "monospace";
 }
 
-#btn {
-  position: absolute;
-  left: 890px;
+.map-resize{
+   width: 600px;
+  height: 100px;
+ 
+}
+#main1{
+  position:relative;
+  bottom:165px;
+  left:160px;
+}
+
+#epic{
+  width: 1510px;
+  height: 110%;
+ 
+    position:relative;
+  bottom:10px;
+  right:10px;
+    
+}
+
+#img2{
+  position:relative;
+  top:20px;
+  left:40px;
+}
+#print{
+   position:relative;
+  top:30px;
+  left:50px;
+}
+
+#boxxy{
+   position:relative;
+  top:20px;
+  left:60px;
+}
+
+.textcol2{
+  
+  background: linear-gradient(90deg, #CCFFFF, #FFCCCC);
+  padding: 2px 20px 20px 20px;
+  margin-top: 22px;
+  margin-bottom: 15px;
+  margin-left: 25px;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.36);
+  height: 450px;
+  width: 300px;
+  border-radius: 20px;
+}
+
+#btn{
+  position:relative;
+  left: 700px;
+  top: 20px;
+  right:500px;
+}
+#footsy
+{
+  position:relative;
+  bottom: 10px;
+  right:11px;
+  width:1520px;
+}
+
+
+#btn1{
+  position: relative;
+  left: 275px;
+  top: 10px;
+  
 }
