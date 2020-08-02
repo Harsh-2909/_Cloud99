@@ -27,8 +27,8 @@ def home(request):
         fill= True,
         stroke= False).add_to(m)
     
-    folium.Polygon(polyg).add_to(m)
-    folium.Polygon(poly3).add_to(m)
+    folium.Polygon(polyg, color= 'crimson').add_to(m)
+    folium.Polygon(poly3, color= '#3186cc').add_to(m)
 
     form = GisModelForm(request.POST or None)
     if form.is_valid():
