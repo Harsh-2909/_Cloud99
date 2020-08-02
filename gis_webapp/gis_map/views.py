@@ -7,14 +7,14 @@ import folium
 
 def home(request):
     
-    m = folium.Map(location=[20.5937, 78.9629], width= '50%', height = '50%', zoom_start=5)
+    m = folium.Map(location=[20.5937, 78.9629], height= '100%', zoom_start=5)
 
     form = GisModelForm(request.POST or None)
     if form.is_valid():
         instance = form.save()
     
         LKP, rad, rad3x = utils.cal([instance.Latitude, instance.Longitude], instance.Speed, instance.Altitude, instance.Direction)
-        m = folium.Map(location=LKP, width= '50%', height = '50%', zoom_start=7)
+        m = folium.Map(location=LKP, zoom_start=7)
         folium.Marker(location=[instance.Latitude, instance.Longitude]).add_to(m)    
 
         folium.Circle(location= LKP,

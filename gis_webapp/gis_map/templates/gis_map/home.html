@@ -1,59 +1,61 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
-    <link rel="stylesheet" href="{% static 'gis_map/styles.css' %}">
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SARAID</title>
-</head>
-<body>
-      <header>
-        <div class = "container">
-          <div class = "imgcol">
-               <img src= "https://i.pinimg.com/originals/47/b7/0e/47b70e02dbe95d8ca08d26d83f0aa632.png"> </div>
-          <div class="textcol">
-            <h1>S.A.R.I.A.D. Project</h1>
-            
-        </div>
-      </header>  
-        <p class="solid"></p>
-        
-      <main>
-        <div class="container2">
-          <div class="imgcol2">
-            <div id="mapid" class="img2">
-        
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <link rel="stylesheet" type= "text/css" href="{% static 'gis_map/styles.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Ops+One&family=Comfortaa&family=Special+Elite&family=Yeseva+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <h3 class="title">S.A.R.A.I.D Project</h3>
+    </div>
+    <div class="container_custom">
+      <div class="row">
+        <div class="col m7 s12 main-division">
+            <div class="map-output">
+                <div id="mapid">
+                  {{ map|safe }}
+                </div>
             </div>
+        </div>
+        <form action="" method= "POST">
+          {% csrf_token %}
+          <div class="col m5 s12 main-division input-box row">
+            {{ form }}
           </div>
-          <div class = "textcol2">
-            {% comment %} <label for="search" class="search">Latitude:</label>
-            <input type="search" class="search" name="search"  id="lat">
-            <label for="search" class="search">Longitude:</label>
-            <input type="search" class="search" name="search" id="long">
-            <label for="search" class="search">Altitude:</label>
-            <input type="search" class ="search" id="search" name="search"> 
-            <label for="search" class="search">Heading (Direction of the plane): </label>
-            <input type="search" id="search" name="search" class="search">
-            <br>
-            <button class="but" type="submit">Submit</button> {% endcomment %}
-            <form action="" method= "POST">
-              {% csrf_token %}
-              {{ form }}
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+          <div class="row center-align">
+            <button class="btn waves-effect waves-light but" type="submit" name="action">Submit</button>
           </div>
-        </div>  
-        <button type = "submit" > <a href="#"> <strong> Print Probability Map </strong> </button> </a>
-      </main>
-      <footer></footer>
-      {{ map|safe }}
-</body>
+        </form>
+      </div>
+    </div>
+    {% comment %} <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button type= "Submit">submit</button>
+    </form> {% endcomment %}
+    <div class="footer">
+      <div class="love">
+        <p>Made with ❤️ in India</p>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,61 @@
+<p><label for="id_Latitude">Latitude:</label> <input type="number" name="Latitude" step="0.00001" required id="id_Latitude"></p>\n
+<p><label for="id_Longitude">Longitude:</label> <input type="number" name="Longitude" step="0.00001" required id="id_Longitude"></p>\n
+<p><label for="id_Altitude">Altitude:</label> <input type="number" name="Altitude" step="0.001" required id="id_Altitude"></p>\n
+<p><label for="id_Speed">Speed:</label> <input type="number" name="Speed" step="0.001" required id="id_Speed"></p>\n
+<p><label for="id_Direction">Direction:</label> <input type="number" name="Direction" required id="id_Direction"></p>
+
+
+
+
+
+
+
+<div class="col m5 s12 main-division input-box row">
+    {{ form }}
+</div>
+
+
+
+<div class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+            <input
+                placeholder="Last Known Latitude"
+                id="id_Latitude"
+                type="number"
+                class="validate"
+                step="0.00001"
+            />
+            <label for="lat">Last Known Position</label>
+            </div>
+            <div class="input-field col s6">
+            <input
+                placeholder="Last Known Longitude"
+                id="id_Longitude"
+                type="number"
+                class="validate"
+                step="0.00001"
+            />
+            <label for="long">Last Known Position</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+            <input id="id_Altitude" type="number" class="validate" step="0.00001"/>
+            <label for="alt">Altitude</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="id_Speed" type="number" class="validate" step="0.00001"/>
+            <label for="vel">Velocity</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input placeholder="In Degrees" id="id_Direction" type="number" class="validate" step="0.00001"/>
+            <label for="dir">Direction</label>
+        </div>
+        <!-- <div class="input-field col s6">
+        <input id="fuel" type="number" class="validate" step="0.01"/>
+        <label for="fuel">Endurance</label>
+        </div> -->
+    </div>

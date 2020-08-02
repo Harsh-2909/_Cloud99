@@ -1,130 +1,58 @@
-#mapid {
-    height: 450px;
-    width: 750px;
-    height: 400px;
-    margin: 25px 20px 10px 30px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.56);
-  }
-  body {
-    width: 100%;
-  }
-  h1 {
-    text-align: center;
-  }
-  form {
-    margin-top: 35px;
-    text-align: center;
-  }
-  button {
-    margin: 20px;
-  }
-  header {
-    color: Black;
-    font-family: Helvetica;
-    font-size: 25px;
-    background: #adf7b1;
-    width: 1359px;
-    height: 120px;
-  }
-  
-  img {
-    height: 100px;
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .container {
-    display: flex;
-  }
-  
-  .but {
-    border: 1px solid #abb3d6c2;
-    margin: 20px;
-    position: relative;
-    top: 20px;
-    font-size: 20px;
-    font-family: "Cambria", "monospace";
-  }
-  
-  .textcol {
-    padding-left: 20px;
-    font-family: "Crimson Text", "Helvetica";
-    font-size: 35px;
-  }
-  
-  .textcol2 {
-    margin: 0 auto;
-    align-items: center;
-  }
-  
-  #img2 {
-    height: 400px;
-    margin: 25px 20px 10px 30px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.56);
-  }
-  
-  main {
-    background: white;
-    height: 600px;
-  }
-  
-  p.solid {
-    border-style: solid;
-    width: 1350px;
-    border-width: 5px;
-    margin-top: 1px;
-    margin-bottom: 1px;
-    border-color: red;
-  }
-  
-  .container2 {
-    display: flex;
-    align-items: center;
-  }
-  
-  .container2 > div {
-    flex-basis: 4%;
-  }
-  
-  footer {
-    background: #785a77;
-    height: 100px;
-    width: 1350px;
-  }
-  
-  body {
-    margin: 0;
-  }
-  
-  button {
-    font-family: "Cambria", "monospace";
-    margin-left: 30px;
-    color: black;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.36);
-  }
-  
-  a {
-    color: black;
-  }
-  
-  a:hover {
-    color: red;
-  }
-  
-  h4 {
-    font-family: Cambria;
-    font-size: 20px;
-  }
-  
-  .search {
-    position: relative;
-    top: 20px;
-    line-height: 70px;
-    font-size: 20px;
-    font-family: "Cambria", "monospace";
-  }
-  
-  #btn {
-    position: absolute;
-    left: 890px;
-  }
-  
+.header {
+  background-image: url("https://i.imgur.com/CQIM6Mp.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto;
+}
+.footer {
+  background-image: url("https://i.imgur.com/Bo6l90N.png");
+  background-repeat: no-repeat;
+  align-content: center;
+  background-size: cover;
+  height: auto;
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-weight: bold;
+}
+.title{
+  padding: 3%;
+  margin-left: 10%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Black Ops One', cursive;
+  font-size:3vw;
+}
+.love {
+  padding: 3%;
+}
+#mapid { 
+  height: 450px;
+  width: auto;
+}
+.container_custom {
+  margin: 1%;
+}
+.main-division{
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.input-box{
+  padding: 2%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #ccffff, #ffcccc);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.36);
+}
+form {
+  color: black;
+}
+.map-output {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.56);
+  border: 2px solid rgba(180, 180, 221, 0.39);
+  border-radius: 5px;
+}
+.but{
+  align-items: center;
+}
+button:hover {
+  transform: scale(1.1);
+  color: red;
+}
