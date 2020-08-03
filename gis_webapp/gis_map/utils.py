@@ -19,8 +19,6 @@ def cal(LKP, speed, altitude, direction, endurance):
         LKP[0] = (-1) * LKP[0]
     if not east:
         LKP[1] = (-1)*LKP[1]
-    # LKP=[22.46180203533398, 85.517578125]    
-    print(f"LKP: {LKP}")
 
     speed= float(speed) * 0.514444 #input 388.769 knots converted to m/s using conv. factor
     altitude= float(altitude) * 1852 #input 23NM converted to metre
@@ -41,9 +39,6 @@ def cal(LKP, speed, altitude, direction, endurance):
 
     Radius = speed*endurance
 
-    print(f"Radius: {Radius}")
-    print()
-
     search_list= [[9.958135,76.251352, 'Kochi', '9595965255'], [12.845297,74.844182, 'Mangalore', '9878456512'],
                 [19.076742,72.822744,'Mumbai', '6568696362'], [22.779764,69.676952, 'Gujarat','5256545859'],
                 [21.691194, 87.736080, 'Mandarmani', '8484858289'], [17.727242, 83.343863, 'Vishakhapatnam', '4241415788'], 
@@ -52,17 +47,14 @@ def cal(LKP, speed, altitude, direction, endurance):
 
     for n in range(0,8):
         dist_list.append(distMeasure(LKP, [search_list[n][0], search_list[n][1]]))
-    print(search_list[dist_list.index(min(dist_list))])
 
     sector = list()
-    print()
     polygon = list()
     slope=-1/m
     rad= Radius*rf*k
     line_datum= [LKP, [LKP[0]+rad/math.sqrt(1+m**2), LKP[1]+m*rad/math.sqrt(1+m**2)]]
 
     rad= 5*1852*rf
-    print(f"Line Datum: {line_datum}")
     polygon.append(line_datum[0])
     for n in range(0,len(line_datum)):
         polygon.append([(line_datum[n][0]- rad/math.sqrt(1+ slope**2)), (line_datum[n][1]- slope*(rad/math.sqrt(1+ slope**2)))])
@@ -77,19 +69,4 @@ def cal(LKP, speed, altitude, direction, endurance):
     sector.append([LKP[0]+rad/math.sqrt(1+m2**2), LKP[1]+m2*rad/math.sqrt(1+m2**2)])
     sector.append(LKP)
 
-    # m = folium.Map(location=LKP, tiles='Stamen Terrain')
-
-    # folium.Polygon(locations=sector,
-    #             popup='search_zone',
-    #             color='#3186cc',
-    #             fill=False,
-    #             fill_opacity= 0.8).add_to(m)
-    # folium.Polygon(locations=polygon,
-    #             popup='search_zone',
-    #             color='#3186cc',
-    #             fill=True,
-    #             fill_color='#ff0000',
-    #             fill_opacity= 0.8,
-    #             stroke=False).add_to(m)
-    # folium.Circle(location=LKP, radius= Radius,color='#3186cc',fill=False).add_to(m)
-    return LKP, Radius, polygon, sector
+    return LKP, Radius, polygon, sector, search_list[dist_list.index(min(dist_list))]
