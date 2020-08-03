@@ -17,21 +17,6 @@ def home(request):
         LKP, rad, polygon, sector, search = utils.cal([instance.Latitude, instance.Longitude], instance.Speed, instance.Altitude, instance.Direction, instance.Endurance)
         search_coord = [search[0], search[1]]
 
-        # m = folium.Map(location=LKP, zoom_start=7)
-        # folium.Marker(location=[instance.Latitude, instance.Longitude]).add_to(m)    
-
-        # folium.Circle(location= LKP,
-        #     radius= rad,
-        #     color= '#010101',
-        #     fill= True,
-        #     stroke= False).add_to(m)
-        
-        # folium.Circle(location= LKP,
-        #     radius= rad3x,
-        #     color= '#3186cc',
-        #     fill= True,
-        #     stroke= False).add_to(m)
-
         m = folium.Map(location=LKP, tiles='Stamen Terrain', zoom_start= 5)
         folium.Marker(location= LKP, tooltip="<i>Last Known Position</i>").add_to(m)
         folium.Polygon(locations=sector,
