@@ -37,7 +37,8 @@ def cal(LKP, speed, altitude, direction, endurance):
     elif direction>270 and direction<359.9999999:
         k=1
 
-    Radius = speed*endurance
+    # Radius = speed*endurance
+    Radius = speed*endurance + (speed*math.sqrt((2*altitude/9.76)))
 
     search_list= [[9.958135,76.251352, 'Kochi', '9595965255'], [12.845297,74.844182, 'Mangalore', '9878456512'],
                 [19.076742,72.822744,'Mumbai', '6568696362'], [22.779764,69.676952, 'Gujarat','5256545859'],
