@@ -14,16 +14,11 @@ def home(request):
         instance = form.save()
         
 
-        LKP, rad, polygon, sector, search = utils.cal([instance.Latitude, instance.Longitude], instance.Speed, instance.Altitude, instance.Direction, instance.Endurance)
+        LKP, rad, polygon, sector, search, search_line = utils.cal([instance.Latitude, instance.Longitude], instance.Speed, instance.Altitude, instance.Direction, instance.Endurance)
         search_coord = [search[0], search[1]]
 
         m = folium.Map(location=LKP, tiles='Stamen Terrain', zoom_start= 5)
         folium.Marker(location= LKP, tooltip="<i>Last Known Position</i>").add_to(m)
-        folium.Polygon(locations=sector,
-                    popup='<b>Divergence Zone</b>',
-                    color='#3186cc',
-                    fill=False,
-                    fill_opacity= 0.8).add_to(m)
         folium.Polygon(locations=polygon,
                     popup='<b>Primary Search Zone</b>',
                     color='#3186cc',
@@ -37,6 +32,16 @@ def home(request):
                     popup= f'''<b>Coordinates: {search_coord}
                     City: {search[2]}
                     Contact Number: {search[3]}</b>''').add_to(m)
+
+        folium.PolyLine(locations= search_line,
+                    tooltip= "<i>Click for more info</i>",
+                    popup= "<b>Search route based on Expanding Square Search technique</b>").add_to(m)
+
+        folium.Polygon(locations=sector,
+                    popup='<b>Divergence Zone</b>',
+                    color='yellow',
+                    fill=False,
+                    fill_opacity= 0.8).add_to(m)
         
     context = {
         'map': m._repr_html_(),

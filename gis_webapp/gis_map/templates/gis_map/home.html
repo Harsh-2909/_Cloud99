@@ -40,8 +40,8 @@
           {% csrf_token %}
           <div class="col m5 s12 main-division input-box row">
             {% comment %} {{ form }} {% endcomment %}
-            <p><label for="id_Latitude">Latitude [Give negative value for South]:</label> <textarea name="Latitude" cols="40" rows="10" required id="id_Latitude" placeholder= "Eg: 23.35.23"></textarea></p>
-            <p><label for="id_Longitude">Longitude [Give negative value for West]:</label> <textarea name="Longitude" cols="40" rows="10" required id="id_Longitude" placeholder= "Eg: 78.34.12"></textarea></p>
+            <p><label for="id_Latitude">Latitude [Give negative value for South]:</label> <textarea name="Latitude" cols="40" rows="10" required id="id_Latitude" placeholder= "Eg: 23.35.23 or -43.23.53"></textarea></p>
+            <p><label for="id_Longitude">Longitude [Give negative value for West]:</label> <textarea name="Longitude" cols="40" rows="10" required id="id_Longitude" placeholder= "Eg: 78.34.12 or -34.24.23"></textarea></p>
             <p><label for="id_Altitude">Altitude (in Nautical Miles):</label> <input type="number" name="Altitude" step="0.001" required id="id_Altitude" placeholder= "10.00"></p>
             <p><label for="id_Speed">Speed (in Knots):</label> <input type="number" name="Speed" step="0.001" required id="id_Speed" placeholder= "400.00"></p>
             <p><label for="id_Direction">Direction (In degree from 0-359):</label> <input type="number" name="Direction" required id="id_Direction" placeholder= "45"></p>

@@ -69,4 +69,31 @@ def cal(LKP, speed, altitude, direction, endurance):
     sector.append([LKP[0]+rad/math.sqrt(1+m2**2), LKP[1]+m2*rad/math.sqrt(1+m2**2)])
     sector.append(LKP)
 
-    return LKP, Radius, polygon, sector, search_list[dist_list.index(min(dist_list))]
+    #Expanding Square Search
+    area= [polygon[1], polygon[2], polygon[4], polygon[5]]
+    search= search_list[dist_list.index(min(dist_list))]
+    search = [search[0], search[1]]
+
+    start = [(area[0][0]+area[2][0])/2,(area[0][1]+area[2][1])/2]
+
+    m_LKP= math.tan(math.radians(90-direction))
+    m=m_LKP
+
+    temp=[start[0],start[1]]
+    search_line=list()
+    s=0.4*1852*rf
+    d=s
+    search_line.append(search)
+    search_line.append(start)
+    k=-1
+    while s<(Radius*rf):
+        search_line.append([temp[0]+ k*s/math.sqrt(1+m**2), temp[1]+ s*k*m/math.sqrt(1+m**2)])
+        m=-1/m
+        temp=search_line[-1]
+        search_line.append([temp[0]+ k*s/math.sqrt(1+m**2), temp[1]+s*k*m/math.sqrt(1+m**2)])
+        temp=search_line[-1]
+        m=-1/m
+        k= k*(-1)
+        s = s+d
+    
+    return LKP, Radius, polygon, sector, search_list[dist_list.index(min(dist_list))], search_line
