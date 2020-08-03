@@ -1,35 +1,95 @@
 import math
 
-def cal(LKP, speed, altitude, direction):
-    search = [22.806567100271522, 86.19873046875]
-    LKP = list(map(float, LKP))
-    speed = float(speed) # input in m/sec
-    altitude = float(altitude) # input in metres
-    g = 9.76318 #acceleration due to gravity
-    rf = 9.231617281886954e-06
+rf=9.231617281886954e-06
+def distMeasure(a,b):
+    dlat= math.radians(a[0])-math.radians(b[0])
+    dlon= math.radians(a[1])-math.radians(b[1])
+    return 6371*2*(math.asin(math.sqrt(math.sin(dlat / 2)**2 + math.cos(math.radians(a[0])) * math.cos(math.radians(b[0])) * math.sin(dlon / 2)**2)))
 
-    fall_time= math.sqrt((2*altitude)/g)
-    d = speed*fall_time*rf # horizontal displacement
-    m = math.tan(90-direction)
-    if direction==0 or direction==360:
-        LKP[1]=LKP[1]+d
-    elif direction == 180:
-        LKP[1]=LKP[1]-d
-    elif direction == 90:
-        LKP[0]=LKP[0]+d
-    elif direction == 270:
-        LKP[0]=LKP[0]-d
-    elif direction>0 and direction<180:
-        LKP[0]=LKP[0]+ d/(math.sqrt(1+ m**2))
-        LKP[1]=LKP[1]+ m*d/(math.sqrt(1+ m**2))
-    elif direction>180 and direction<359.99999999:
-        LKP[0]=LKP[0]- d/(math.sqrt(1+ m**2))
-        LKP[1]=LKP[1]- m*d/(math.sqrt(1+ m**2))
-    nav_err = 1852 # navigational fix error of Military Radar
-    dr_perc = 0.05 # Dead reckoning % for aircraft with more than 2 engine
-    dr_distance = speed*fall_time
-    dr_err = dr_perc*dr_distance
-    dist = (math.sqrt((search[1]-LKP[1])**2 + (search[0]-LKP[0])**2))/rf
-    search_err = 5*1852 + 0.05*float(dist) # search facility error
-    radius = math.sqrt((nav_err+float(dr_err))**2 +search_err**2)
-    return LKP, radius, radius*3 # shifted LKP is the center, 50% radius, 100% radius
+def cal(LKP, speed, altitude, direction, endurance):
+    lat_d, lat_m, lat_s = map(int, LKP[0].split("."))
+    lon_d, lon_m, lon_s = map(int, LKP[1].split("."))
+
+    north = False if lat_d < 0 else True
+    east = False if lon_d < 0 else True
+
+    LKP=[abs(lat_d)+lat_m*0.016667+lat_s*0.00027778, abs(lon_d)+lon_m*0.016667+lon_s*0.00027778]
+
+    if not north:
+        LKP[0] = (-1) * LKP[0]
+    if not east:
+        LKP[1] = (-1)*LKP[1]
+    # LKP=[22.46180203533398, 85.517578125]    
+    print(f"LKP: {LKP}")
+
+    speed= float(speed) * 0.514444 #input 388.769 knots converted to m/s using conv. factor
+    altitude= float(altitude) * 1852 #input 23NM converted to metre
+    endurance= float(endurance) * 3600 #input in hour convert to sec
+
+    m = math.tan(math.radians(90-direction))
+    m1=math.tan(math.radians(90-(direction+10)))
+    m2=math.tan(math.radians(90-(direction-10)))
+    k=0
+    if direction>0 and direction<90:
+        k=1
+    elif direction>90 and direction<180:
+        k=-1
+    elif direction>180 and direction<270:
+        k=-1
+    elif direction>270 and direction<359.9999999:
+        k=1
+
+    Radius = speed*endurance
+
+    print(f"Radius: {Radius}")
+    print()
+
+    search_list= [[9.958135,76.251352, 'Kochi', '9595965255'], [12.845297,74.844182, 'Mangalore', '9878456512'],
+                [19.076742,72.822744,'Mumbai', '6568696362'], [22.779764,69.676952, 'Gujarat','5256545859'],
+                [21.691194, 87.736080, 'Mandarmani', '8484858289'], [17.727242, 83.343863, 'Vishakhapatnam', '4241415788'], 
+                [13.088354,80.298761,'Chennai', '4543432116'], [8.092543, 77.555034, 'Kanyakumari', '7878744129']]
+    dist_list=list()
+
+    for n in range(0,8):
+        dist_list.append(distMeasure(LKP, [search_list[n][0], search_list[n][1]]))
+    print(search_list[dist_list.index(min(dist_list))])
+
+    sector = list()
+    print()
+    polygon = list()
+    slope=-1/m
+    rad= Radius*rf*k
+    line_datum= [LKP, [LKP[0]+rad/math.sqrt(1+m**2), LKP[1]+m*rad/math.sqrt(1+m**2)]]
+
+    rad= 5*1852*rf
+    print(f"Line Datum: {line_datum}")
+    polygon.append(line_datum[0])
+    for n in range(0,len(line_datum)):
+        polygon.append([(line_datum[n][0]- rad/math.sqrt(1+ slope**2)), (line_datum[n][1]- slope*(rad/math.sqrt(1+ slope**2)))])
+    polygon.append(line_datum[-1])
+    for n in range(0,len(line_datum)):
+        polygon.append([(line_datum[-1*(n+1)][0]+ rad/math.sqrt(1+ slope**2)),(line_datum[-1*(n+1)][1]+ slope*(rad/math.sqrt(1+ slope**2)))])
+    polygon.append(line_datum[0])
+
+    rad= Radius*rf*k
+    sector.append(LKP)
+    sector.append([LKP[0]+rad/math.sqrt(1+m1**2), LKP[1]+m1*rad/math.sqrt(1+m1**2)])
+    sector.append([LKP[0]+rad/math.sqrt(1+m2**2), LKP[1]+m2*rad/math.sqrt(1+m2**2)])
+    sector.append(LKP)
+
+    # m = folium.Map(location=LKP, tiles='Stamen Terrain')
+
+    # folium.Polygon(locations=sector,
+    #             popup='search_zone',
+    #             color='#3186cc',
+    #             fill=False,
+    #             fill_opacity= 0.8).add_to(m)
+    # folium.Polygon(locations=polygon,
+    #             popup='search_zone',
+    #             color='#3186cc',
+    #             fill=True,
+    #             fill_color='#ff0000',
+    #             fill_opacity= 0.8,
+    #             stroke=False).add_to(m)
+    # folium.Circle(location=LKP, radius= Radius,color='#3186cc',fill=False).add_to(m)
+    return LKP, Radius, polygon, sector
