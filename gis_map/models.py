@@ -21,7 +21,7 @@ class InputLoc(models.Model):
     def __str__(self):
         return f"LKP: ({self.latitude},{self.longitude})"
 
-class SearchFacitily(models.Model):
+class SearchFacility(models.Model):
 
     name = models.CharField(max_length= 50)
     contact = models.IntegerField(default= 0)

@@ -7,15 +7,13 @@ import folium
 
 def home(request):
     
-    m = folium.Map(location=[20.5937, 78.9629], height= '100%', zoom_start=5)
+    m = folium.Map(location=[20.5937, 78.9629], width= '50%', height= '50%', zoom_start=5)
 
     form = GisModelForm(request.POST or None)
-    # searchForm = SearchRouteChoice(request.POST or None)
     if form.is_valid():
         instance = form.save()
         
-
-        LKP, rad, polygon, sector, search, search_line = utils.cal([instance.Latitude, instance.Longitude], instance.Speed, instance.Altitude, instance.Direction, instance.Endurance)
+        LKP, rad, polygon, sector, search, search_line = utils.cal([instance.latitude, instance.longitude], instance.speed, instance.altitude, instance.direction, instance.endurance)
         search_coord = [search[0], search[1]]
 
         m = folium.Map(location=LKP, tiles='Stamen Terrain', zoom_start= 5)
