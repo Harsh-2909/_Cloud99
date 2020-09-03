@@ -1,48 +1,25 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SARAID</title>
-    <link rel="stylesheet" type= "text/css" href="{% static 'gis_map/styles.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-  </head>
-  <body>
-    <div class="header">
-      <h3 class="title">S.A.R.A.I.D Project</h3>
+{% extends "gis_map/base.html" %}
+{% block content %}
+<div class="container_custom">
+  <div class="col m7 s12 main-division map-output">
+      {{ map|safe }}
+  </div>
+  <form action="" method= "POST">
+    {% csrf_token %}
+    <div class="col m5 s12 main-division input-box row">
+      {{ form }}
+      {% comment %} <p><label for="id_Latitude">Latitude [Give negative value for South]:</label> <textarea name="Latitude" cols="40" rows="10" required id="id_Latitude" placeholder= "Eg: 23.35.23 or -43.23.53"></textarea></p>
+      <p><label for="id_Longitude">Longitude [Give negative value for West]:</label> <textarea name="Longitude" cols="40" rows="10" required id="id_Longitude" placeholder= "Eg: 78.34.12 or -34.24.23"></textarea></p>
+      <p><label for="id_Altitude">Altitude (in Nautical Miles):</label> <input type="number" name="Altitude" step="0.001" required id="id_Altitude" placeholder= "10.00"></p>
+      <p><label for="id_Speed">Speed (in Knots):</label> <input type="number" name="Speed" step="0.001" required id="id_Speed" placeholder= "400.00"></p>
+      <p><label for="id_Direction">Direction (In degree from 0-359):</label> <input type="number" name="Direction" required id="id_Direction" placeholder= "45"></p>
+      <p><label for="id_Endurance">Endurance (In hours):</label> <input type="number" name="Endurance" step="0.001" required id="id_Endurance" placeholder= "0.0"></p> {% endcomment %}
     </div>
-    <div class="container_custom">
-      <div class="row">
-        <div class="col m7 s12 main-division">
-            <div class="map-output">
-              {{ map|safe }}
-            </div>
-        </div>
-        <form action="" method= "POST">
-          {% csrf_token %}
-          <div class="col m5 s12 main-division input-box row">
-            {{ form }}
-            {% comment %} <p><label for="id_Latitude">Latitude [Give negative value for South]:</label> <textarea name="Latitude" cols="40" rows="10" required id="id_Latitude" placeholder= "Eg: 23.35.23 or -43.23.53"></textarea></p>
-            <p><label for="id_Longitude">Longitude [Give negative value for West]:</label> <textarea name="Longitude" cols="40" rows="10" required id="id_Longitude" placeholder= "Eg: 78.34.12 or -34.24.23"></textarea></p>
-            <p><label for="id_Altitude">Altitude (in Nautical Miles):</label> <input type="number" name="Altitude" step="0.001" required id="id_Altitude" placeholder= "10.00"></p>
-            <p><label for="id_Speed">Speed (in Knots):</label> <input type="number" name="Speed" step="0.001" required id="id_Speed" placeholder= "400.00"></p>
-            <p><label for="id_Direction">Direction (In degree from 0-359):</label> <input type="number" name="Direction" required id="id_Direction" placeholder= "45"></p>
-            <p><label for="id_Endurance">Endurance (In hours):</label> <input type="number" name="Endurance" step="0.001" required id="id_Endurance" placeholder= "0.0"></p> {% endcomment %}
-          </div>
-          <div class="row center-align">
-            <button class="btn waves-effect waves-light but" type="submit" name="action">Submit</button>
-          </div>
-        </form>
-      </div>
+    <div class="center-align">
+      <button class="btn waves-effect waves-light but" type="submit" name="action">Submit</button>
     </div>
-    <div class="footer">
-      <div class="love">
-        <p>Made with ❤️ in India</p>
-      </div>
-    </div>
-  </body>
-</html>
+  </form>
+</div>
+{% endblock content %}
+  {% comment %} </body>
+</html> {% endcomment %}
