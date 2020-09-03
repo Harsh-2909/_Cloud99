@@ -10,6 +10,13 @@ class InputLoc(models.Model):
     Speed = models.DecimalField(max_digits=6, decimal_places=3)
     Direction = models.IntegerField()
     Endurance = models.DecimalField(max_digits=6, decimal_places=3, default= 0.0)
+    route_choices = [
+        ('ES', 'Expanding Square'),
+        ('PS', 'Parallel Sweep'),
+        ('CS', 'Creeping Sweep')
+    ]
+    search_choice = models.CharField(choices= route_choices,
+    help_text= "Choose the search route to display on map", max_length= 30, default= 'ES')
 
     def __str__(self):
         return f'''Last Known Position: ({self.Latitude},{self.Longitude})'''

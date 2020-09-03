@@ -10,6 +10,7 @@ def home(request):
     m = folium.Map(location=[20.5937, 78.9629], height= '100%', zoom_start=5)
 
     form = GisModelForm(request.POST or None)
+    # searchForm = SearchRouteChoice(request.POST or None)
     if form.is_valid():
         instance = form.save()
         
@@ -45,7 +46,7 @@ def home(request):
         
     context = {
         'map': m._repr_html_(),
-        'form': form.as_p()
+        'form': form,
     }
 
     return render(request, 'gis_map/home.html', context)
