@@ -20,6 +20,15 @@ class InputLoc(models.Model):
 
     def __str__(self):
         return f"LKP: ({self.latitude},{self.longitude})"
+    
+    def ExpandingSquare(self):
+        pass
+    
+    def ParallelSweep(self):
+        pass
+
+    def CreepingSweep(self):
+        pass
 
 class SearchFacility(models.Model):
 
