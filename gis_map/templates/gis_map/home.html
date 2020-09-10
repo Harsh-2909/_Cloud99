@@ -51,7 +51,7 @@
     </script>
     <nav>
       <div class="nav-wrapper header">
-        <a href="#" class="title">S.A.R.A.I.D Project</a>
+        <a href="{% url 'home' %}" class="title">S.A.R.A.I.D Project</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="#">Sign Up</a></li>
@@ -71,7 +71,9 @@
     <div id="modal1" class="modal">
       <div class="modal-content">
         <h5 class="center-align">Quick Start Guide</h5>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur obcaecati ipsam quod tenetur deserunt blanditiis ullam, temporibus omnis doloribus doloremque natus, dolorem magni ex esse hic. Molestias nisi officiis id!</p>
+        {% for line in guide %}
+          <p>{{ line }}</p>
+        {% endfor %}
       </div>
       <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
