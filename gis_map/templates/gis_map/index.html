@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SARAID</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="{% static "gis_map/landing.css "%}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Ops+One&family=Comfortaa&family=Special+Elite&family=Yeseva+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.parallax');
+            var instances = M.Parallax.init(elems);
+        });
+    </script>
+  </head>
+  <body>
+    <div class="parallax-container">
+        <div class="parallax"><img src="https://images.pexels.com/photos/1549308/pexels-photo-1549308.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+      </div>
+      <div class="section yellow darken-2">
+        <div class="row container center-align">
+          <h2 class="header title">SARAID Project</h2>
+          <p class="white-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae fuga libero ducimus iusto! Deserunt quisquam doloremque est, quo ut asperiores porro unde, facere nam facilis nesciunt vitae. Soluta ea neque eligendi culpa eos animi, voluptatibus officia explicabo tempore sed, maxime modi hic laboriosam. Illum veniam voluptatem deleniti reprehenderit, animi quam!</p>
+        </div>
+        <div class="row container">
+          <div class="center-align">
+            <a href="{% url 'search' %}" class="waves-effect waves-light btn yellow darken-3">Get Started</a>
+          </div>
+          {% comment %} <div class="col s6 center-align">
+            <a href="show.html" class="waves-effect waves-light btn yellow darken-3">Previous Seaches</a>
+          </div> {% endcomment %}
+        </div>
+      </div>
+      <div class="parallax-container">
+        <div class="parallax"><img src="https://images.pexels.com/photos/3987005/pexels-photo-3987005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+    </div>
+  </body>
+</html>
