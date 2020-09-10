@@ -113,29 +113,29 @@
                       <div class="input-field col s4">
                         {% comment %} <input id="alt" type="number" class="validate" step="0.00001" required="required"/> {% endcomment %}
                         {{ form.altitude }}
-                        <label for="alt">Altitude</label>
+                        <label for="alt">Altitude (in feets)</label>
                       </div>
                       <div class="input-field col s4">
                           {% comment %} <input id="speed" type="number" class="validate" step="0.00001" required="required"/> {% endcomment %}
                           {{ form.speed }}
-                          <label for="speed">Speed</label>
+                          <label for="speed">Speed (in knots)</label>
                       </div>
                       <div class="input-field col s4">
                         {% comment %} <input id="endurance" type="number" class="validate" step="0.01" required="required"/> {% endcomment %}
                         {{ form.endurance }}
-                        <label for="endurance">Endurance</label>
+                        <label for="endurance">Endurance (in hrs)</label>
                       </div>
                     </div>
                     <div class="row">
                       <div class="input-field col s6">
                         {% comment %} <input placeholder="In Degrees" id="dir" type="number" class="validate" step="0.00001" required="required"/> {% endcomment %}
                         {{ form.direction }}
-                        <label for="dir">Direction</label>
+                        <label for="dir">Direction (in degree)</label>
                       </div>
                       <div class="input-field col s6">
                         {% comment %} <input id="divergence" type="number" class="validate" step="0.01" required="required"/> {% endcomment %}
                         {{ form.divergence }}
-                        <label for="divergence">Degree of Divergence</label>
+                        <label for="divergence">Degree of Divergence (in degree)</label>
                       </div>
                     </div>
                     <div class="row">
@@ -151,7 +151,7 @@
                       </div>
                     </div>
                     <div class="row center-align">
-                      <a class="waves-effect waves-light btn yellow darken-4" type="submit" name="action"><i class="material-icons right">save</i>Save</a>
+                      <button class="waves-effect waves-light btn yellow darken-4" type="submit">Submit</button>
                     </div>
                   </form>
                 </div>
