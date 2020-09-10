@@ -1,32 +1,21 @@
 import math
+# from .models import SearchFacility
 
-rf=9.231617281886954e-06
 def distMeasure(a,b):
     dlat= math.radians(a[0])-math.radians(b[0])
     dlon= math.radians(a[1])-math.radians(b[1])
     return 6371*2*(math.asin(math.sqrt(math.sin(dlat / 2)**2 + math.cos(math.radians(a[0])) * math.cos(math.radians(b[0])) * math.sin(dlon / 2)**2)))
 
-def cal(LKP, speed, altitude, direction, endurance):
-    # lat_d, lat_m, lat_s = map(int, LKP[0].split("."))
-    # lon_d, lon_m, lon_s = map(int, LKP[1].split("."))
+def cal(LKP, speed, altitude, direction, endurance, divergence=10):
 
-    # north = False if lat_d < 0 else True
-    # east = False if lon_d < 0 else True
-
-    # LKP=[abs(lat_d)+lat_m*0.016667+lat_s*0.00027778, abs(lon_d)+lon_m*0.016667+lon_s*0.00027778]
-
-    # if not north:
-    #     LKP[0] = (-1) * LKP[0]
-    # if not east:
-    #     LKP[1] = (-1)*LKP[1]
-
-    speed = speed * 0.514444 #input 388.769 knots converted to m/s using conv. factor
+    rf=9.231617281886954e-06
+    speed = speed * 0.514444 # Knots converted to m/s 
     altitude = altitude * 0.3048 # feet converted to metre
-    endurance = endurance * 3600 #input in hour convert to sec
+    endurance = endurance * 3600 # hour converted to sec
 
     m = math.tan(math.radians(90-direction))
-    m1=math.tan(math.radians(90-(direction+10)))
-    m2=math.tan(math.radians(90-(direction-10)))
+    m1=math.tan(math.radians(90-(direction+divergence)))
+    m2=math.tan(math.radians(90-(direction-divergence)))
     k=0
     if direction>0 and direction<90:
         k=1
