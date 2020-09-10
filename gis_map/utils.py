@@ -7,22 +7,22 @@ def distMeasure(a,b):
     return 6371*2*(math.asin(math.sqrt(math.sin(dlat / 2)**2 + math.cos(math.radians(a[0])) * math.cos(math.radians(b[0])) * math.sin(dlon / 2)**2)))
 
 def cal(LKP, speed, altitude, direction, endurance):
-    lat_d, lat_m, lat_s = map(int, LKP[0].split("."))
-    lon_d, lon_m, lon_s = map(int, LKP[1].split("."))
+    # lat_d, lat_m, lat_s = map(int, LKP[0].split("."))
+    # lon_d, lon_m, lon_s = map(int, LKP[1].split("."))
 
-    north = False if lat_d < 0 else True
-    east = False if lon_d < 0 else True
+    # north = False if lat_d < 0 else True
+    # east = False if lon_d < 0 else True
 
-    LKP=[abs(lat_d)+lat_m*0.016667+lat_s*0.00027778, abs(lon_d)+lon_m*0.016667+lon_s*0.00027778]
+    # LKP=[abs(lat_d)+lat_m*0.016667+lat_s*0.00027778, abs(lon_d)+lon_m*0.016667+lon_s*0.00027778]
 
-    if not north:
-        LKP[0] = (-1) * LKP[0]
-    if not east:
-        LKP[1] = (-1)*LKP[1]
+    # if not north:
+    #     LKP[0] = (-1) * LKP[0]
+    # if not east:
+    #     LKP[1] = (-1)*LKP[1]
 
-    speed= float(speed) * 0.514444 #input 388.769 knots converted to m/s using conv. factor
-    altitude= float(altitude) * 1852 #input 23NM converted to metre
-    endurance= float(endurance) * 3600 #input in hour convert to sec
+    speed = speed * 0.514444 #input 388.769 knots converted to m/s using conv. factor
+    altitude = altitude * 0.3048 # feet converted to metre
+    endurance = endurance * 3600 #input in hour convert to sec
 
     m = math.tan(math.radians(90-direction))
     m1=math.tan(math.radians(90-(direction+10)))
