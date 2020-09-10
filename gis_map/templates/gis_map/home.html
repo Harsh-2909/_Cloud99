@@ -1,25 +1,179 @@
-{% extends "gis_map/base.html" %}
-{% block content %}
-<div class="container_custom">
-  <div class="col m7 s12 main-division map-output">
-      {{ map|safe }}
-  </div>
-  <form action="" method= "POST">
-    {% csrf_token %}
-    <div class="col m5 s12 main-division input-box row">
-      {{ form }}
-      {% comment %} <p><label for="id_Latitude">Latitude [Give negative value for South]:</label> <textarea name="Latitude" cols="40" rows="10" required id="id_Latitude" placeholder= "Eg: 23.35.23 or -43.23.53"></textarea></p>
-      <p><label for="id_Longitude">Longitude [Give negative value for West]:</label> <textarea name="Longitude" cols="40" rows="10" required id="id_Longitude" placeholder= "Eg: 78.34.12 or -34.24.23"></textarea></p>
-      <p><label for="id_Altitude">Altitude (in Nautical Miles):</label> <input type="number" name="Altitude" step="0.001" required id="id_Altitude" placeholder= "10.00"></p>
-      <p><label for="id_Speed">Speed (in Knots):</label> <input type="number" name="Speed" step="0.001" required id="id_Speed" placeholder= "400.00"></p>
-      <p><label for="id_Direction">Direction (In degree from 0-359):</label> <input type="number" name="Direction" required id="id_Direction" placeholder= "45"></p>
-      <p><label for="id_Endurance">Endurance (In hours):</label> <input type="number" name="Endurance" step="0.001" required id="id_Endurance" placeholder= "0.0"></p> {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SARAID</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="{% static 'gis_map/styles.css' %}"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Ops+One&family=Comfortaa&family=Special+Elite&family=Yeseva+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        let elems = document.querySelectorAll('select');
+        let instances = M.FormSelect.init(elems, {});
+      });
+      document.addEventListener('DOMContentLoaded', function() {
+        let elems = document.querySelectorAll('.sidenav');
+        let instances = M.Sidenav.init(elems, {});
+      });
+    </script>
+  </head>
+  <body>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        let elems = document.querySelector('.modal');
+        let instance = M.Modal.init(elems, {
+          preventScrolling: false,
+          opacity: 0.45
+        });
+        instance.open();
+      });
+    </script>
+    <nav>
+      <div class="nav-wrapper header">
+        <a href="#" class="title">S.A.R.A.I.D Project</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="#">Sign Up</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Logout</a></li>
+          <li><a href="#modal1" class="modal-trigger"><i class="material-icons">info_outline</i></a></li>
+        </ul>
+      </div>
+    </nav>
+  
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="#">Sign Up</a></li>
+      <li><a href="#">Login</a></li>
+      <li><a href="#">Logout</a></li>
+      <li><a href="#modal1" class="modal-trigger"><i class="material-icons">info_outline</i></a></li>
+    </ul>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h5 class="center-align">Quick Start Guide</h5>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur obcaecati ipsam quod tenetur deserunt blanditiis ullam, temporibus omnis doloribus doloremque natus, dolorem magni ex esse hic. Molestias nisi officiis id!</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
     </div>
-    <div class="center-align">
-      <button class="btn waves-effect waves-light but" type="submit" name="action">Submit</button>
-    </div>
-  </form>
-</div>
-{% endblock content %}
-  {% comment %} </body>
-</html> {% endcomment %}
+    <main class="container_custom">
+      <div class="row">
+        <div class="col m6 s12 main-division">
+          <div class="input-box">
+            <div class="row">
+                <div class="col s12">
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="input-field col s6">
+                        {% comment %} <input type="number" placeholder="Latitude" class="validate" required="required" id="latitude"> {% endcomment %}
+                        {{ form.latitude }}
+                        <label for="latitude">Latitude</label>
+                      </div>
+                      {% comment %} <div class="input-field col s3">
+                        <select class="item-select" id="south">
+                          <option value="0" selected>North</option>
+                          <option value="1">South</option>
+                        </select>
+                      </div> {% endcomment %}
+                      <div class="input-field col s6">
+                        {% comment %} <input type="number" placeholder="Longitude" class="validate" required="required" id="longitude"> {% endcomment %}
+                        {{ form.longitude }}
+                        <label for="longitude">Longitude</label>
+                      </div>
+                      {% comment %} <div class="input-field col s3">
+                        <select class="item-select" id="west">
+                          <option value="0" selected>East</option>
+                          <option value="1">West</option>
+                        </select>
+                      </div> {% endcomment %}
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s4">
+                        {% comment %} <input id="alt" type="number" class="validate" step="0.00001" required="required"/> {% endcomment %}
+                        {{ form.altitude }}
+                        <label for="alt">Altitude</label>
+                      </div>
+                      <div class="input-field col s4">
+                          {% comment %} <input id="speed" type="number" class="validate" step="0.00001" required="required"/> {% endcomment %}
+                          {{ form.speed }}
+                          <label for="speed">Speed</label>
+                      </div>
+                      <div class="input-field col s4">
+                        {% comment %} <input id="endurance" type="number" class="validate" step="0.01" required="required"/> {% endcomment %}
+                        {{ form.endurance }}
+                        <label for="endurance">Endurance</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s6">
+                        {% comment %} <input placeholder="In Degrees" id="dir" type="number" class="validate" step="0.00001" required="required"/> {% endcomment %}
+                        {{ form.direction }}
+                        <label for="dir">Direction</label>
+                      </div>
+                      <div class="input-field col s6">
+                        {% comment %} <input id="divergence" type="number" class="validate" step="0.01" required="required"/> {% endcomment %}
+                        {{ form.divergence }}
+                        <label for="divergence">Degree of Divergence</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        {% comment %} <select class="item-select">
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="ES" data-icon="https://i.imgur.com/E2ELexM.png">Expanding Square</option>
+                          <option value="PS" data-icon="https://i.imgur.com/1f1U6Qk.png" disabled>Parallel Sweep</option>
+                          <option value="CS" data-icon="https://i.imgur.com/z5XMFqi.png" disabled>Creeping Sweep</option>
+                        </select> {% endcomment %}
+                        {{ form.search_choice }}
+                        <label>Select Search Type</label>
+                      </div>
+                    </div>
+                    <div class="row center-align">
+                      <a class="waves-effect waves-light btn yellow darken-4" type="submit" name="action"><i class="material-icons right">save</i>Save</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col m6 s12 main-division">
+          <div class="map-output">
+              <div id="mapid">
+                {{ map|safe }}
+              </div>
+          </div>
+          <!-- <div class="col s12">
+            <button type = "submit" id="btn1" class="align-center"><strong> Print Probability Map </strong></button>
+          </div> -->
+        </div>
+      </div>
+    </main>
+    <footer class="page-footer white">
+      <div class="footer love">
+        <p>Made with ❤️ in India</p>
+      </div>
+    </footer>
+  </body>
+</html>
