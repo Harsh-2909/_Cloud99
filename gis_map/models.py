@@ -1,6 +1,16 @@
 from django.db import models
 import folium
-from . import utils
+from .utils import cal
+
+class SearchFacility(models.Model):
+
+    name = models.CharField(max_length= 50)
+    contact = models.IntegerField(default= 0)
+    latitude = models.FloatField(default= 0.0)
+    longitude = models.FloatField(default= 0.0)
+
+    def __str__(self):
+        return self.name
 
 class InputLoc(models.Model):
 
@@ -10,13 +20,13 @@ class InputLoc(models.Model):
         ('CS', 'Creeping Sweep')
     ]
 
-    latitude = models.FloatField(help_text= "Enter Latitude in Degrees", default= 0.0)
-    longitude = models.FloatField(help_text= "Enter Longitude in Degrees", default= 0.0)
+    latitude = models.FloatField(help_text= "Enter Latitude in Degrees", default= 20.5937)
+    longitude = models.FloatField(help_text= "Enter Longitude in Degrees", default= 78.9629)
     altitude = models.FloatField(help_text= "Enter Altitude in feets", default= 0.0) # Unit: feets
     speed = models.FloatField(help_text= "Enter Speed in knots", default= 0.0) # Unit: knots
     direction = models.FloatField(help_text= "Enter Direction in Degrees", default= 0.0) # Unit: degrees
     endurance = models.FloatField(help_text= "Enter Endurance in hours", default= 0.0) # Unit: hrs
-    divergence = models.FloatField(help_text= "Enter Divergence in Degrees", default= 0.0) # Unit: degrees
+    divergence = models.FloatField(help_text= "Enter Divergence in Degrees", default= 10) # Unit: degrees
     search_choice = models.CharField(choices= route_choices,
     help_text= "Choose the search route to display on map", max_length= 30, default= 'ES')
 
@@ -24,7 +34,9 @@ class InputLoc(models.Model):
         return f"LKP: ({self.latitude},{self.longitude})"
     
     def ExpandingSquare(self):
-        LKP, rad, polygon, sector, search, search_line = utils.cal([self.latitude, self.longitude], self.speed, self.altitude, self.direction, self.endurance)
+
+        # search_list = SearchFacility.objects.all()
+        LKP, rad, polygon, sector, search, search_line = cal([self.latitude, self.longitude], self.speed, self.altitude, self.direction, self.endurance, self.divergence)
         search_coord = [search[0], search[1]]
 
         m = folium.Map(location=LKP, tiles='Stamen Terrain', zoom_start= 5)
@@ -60,13 +72,3 @@ class InputLoc(models.Model):
 
     def CreepingSweep(self):
         pass
-
-class SearchFacility(models.Model):
-
-    name = models.CharField(max_length= 50)
-    contact = models.IntegerField(default= 0)
-    latitude = models.FloatField(default= 0.0)
-    longitude = models.FloatField(default= 0.0)
-
-    def __str__(self):
-        return self.name
